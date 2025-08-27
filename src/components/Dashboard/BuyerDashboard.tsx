@@ -50,7 +50,7 @@ const BuyerDashboard: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div>
+      <div className='ml-4 mt-5'>
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Marketplace Tayka</h2>
         <p className="text-gray-600">Descubre productos auténticos de la cultura andina</p>
       </div>

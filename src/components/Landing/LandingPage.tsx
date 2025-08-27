@@ -1,5 +1,5 @@
-import { Mountain, Users, Store, Truck, ArrowLeft, ArrowRight, Mail } from 'lucide-react';
-import { AnimatePresence, motion } from 'framer-motion';
+import { Users, Store, Truck, ArrowLeft, ArrowRight, Mail } from 'lucide-react';
+import { AnimatePresence, motion, } from 'framer-motion';
 import {
   ResponsiveContainer,
   BarChart,
@@ -62,31 +62,38 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
     },
   ];
 
+  const scrollToSection = (id: string) => {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+  }
+};
+
+
   const [currentStore, setCurrentStore] = useState(0);
   const [slideDirection, setSlideDirection] = useState<'next' | 'prev'>('next');
 
-const nextStore = () => {
-  setSlideDirection(1);
-  setCurrentStore((prev) => (prev + 1) % featuredStores.length);
-};
-
-const prevStore = () => {
-  setSlideDirection(-1);
-  setCurrentStore((prev) =>
-    prev === 0 ? featuredStores.length - 1 : prev - 1
-  );
-};
-
-// autoplay
-useEffect(() => {
-  const id = setInterval(() => {
+  const nextStore = () => {
     setSlideDirection(1);
-    setCurrentStore((prev) => (prev + 1) % featuredStores.length);
-  }, 12000);
+    setCurrentStore((prev) => (prev + 1) % featuredStores!.length);
+  };
 
-  return () => clearInterval(id);
-}, [featuredStores.length]);
+  const prevStore = () => {
+    setSlideDirection(-1);
+    setCurrentStore((prev) =>
+      prev === 0 ? featuredStores!.length - 1 : prev - 1
+    );
+  };
 
+  // Autoplay
+  useEffect(() => {
+    const id = setInterval(() => {
+      setSlideDirection(1);
+      setCurrentStore((prev) => (prev + 1) % featuredStores!.length);
+    }, 7000);
+
+    return () => clearInterval(id);
+  }, [featuredStores!.length]);
 
 
   const communityData: CommunityData[] = [
@@ -132,24 +139,32 @@ useEffect(() => {
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <div className="p-1 rounded-lg">
-              <img className="h-15 w-full text-amber-600" src="./taykalogo.png" />
+              <img className="h-24 w-full text-amber-600" src="./taykalogo.png" />
             </div>
             <div>
               <div className="text-xs text-gray-500">Madre Tierra • Mercado tradicional</div>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3">
             <nav className="hidden md:flex gap-6 text-gray-700">
-              <button className="hover:text-amber-600 transition">Características</button>
-              <button className="hover:text-amber-600 transition">Estadísticas</button>
-              <button className="hover:text-amber-600 transition">Historias</button>
+              <a href="#estadisticas" className="hover:text-amber-600 transition">
+                Estadísticas
+              </a>
+              <a href="#caracteristicas" className="hover:text-amber-600 transition">
+                Características
+              </a>
+              <a href="#historias" className="hover:text-amber-600 transition">
+                Historias
+              </a>
             </nav>
+
+
 
             <div className="flex items-center gap-2">
               <button
                 onClick={onGetStarted}
-                className="hidden sm:inline-flex items-center gap-2 bg-amber-600 text-white px-5 py-2 rounded-lg shadow hover:bg-amber-700 transition"
+                className="hidden sm:inline-flex items-center gap-2 bg-amber-600 text-white px-5 py-2 rounded-lg shadow hover:bg-amber-700 transition p-5x-7 py-3 rounded-xl font-semibold shadow-lg hover:scale-[1.03] transition"
               >
                 Comenzar
                 <ArrowRight className="h-4 w-4" />
@@ -190,13 +205,15 @@ useEffect(() => {
               <ArrowRight className="h-5 w-5" />
             </button>
             <button
-              onClick={() =>
-                window.scrollTo({ top: 900, behavior: "smooth" })
-              }
+              onClick={() => {
+                const section = document.getElementById("estadisticas");
+                section?.scrollIntoView({ behavior: "smooth" });
+              }}
               className="inline-flex items-center gap-2 border border-gray-200 px-7 py-3 rounded-xl bg-white hover:shadow-md transition"
             >
-              Ver estadisticas
+              Ver estadísticas
             </button>
+
           </div>
         </motion.div>
 
@@ -275,7 +292,7 @@ useEffect(() => {
 
 
       {/* Stats / Charts */}
-      <section className="py-20 bg-white">
+      <section id="estadisticas" className="py-20 bg-white scroll-mt-30">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex flex-col lg:flex-row gap-8">
             <div className="lg:w-1/2 bg-amber-50 p-6 rounded-2xl shadow-sm">
@@ -325,7 +342,7 @@ useEffect(() => {
       </section>
 
       {/* Features */}
-      <section className="py-20 bg-gradient-to-br from-amber-50 to-orange-50">
+      <section id="caracteristicas" className="py-20 bg-gradient-to-br from-amber-50 to-orange-50 scroll-mt-30">
         <div className="max-w-7xl mx-auto px-4 text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold mb-3">Una plataforma para todos</h2>
           <p className="text-lg text-gray-700 max-w-2xl mx-auto">Herramientas pensadas para vendedores, compradores y distribuidores con respeto por la tradición.</p>
@@ -365,7 +382,7 @@ useEffect(() => {
       </section>
 
       {/* Testimonials */}
-      <section className="py-20 bg-white">
+      <section id="historias" className="py-20 bg-white scroll-mt-30">
         <div className="max-w-7xl mx-auto px-4 text-center mb-8">
           <h2 className="text-3xl font-bold">Historias de nuestra comunidad</h2>
           <p className="text-gray-600 mt-2">Voces reales que comparten el impacto de Tayka.</p>
@@ -394,7 +411,7 @@ useEffect(() => {
           <p className="mb-6 text-amber-100">Crear una cuenta es gratis — empieza a compartir y vender productos auténticos.</p>
           <div className="flex justify-center gap-4">
             <button onClick={onGetStarted} className="bg-white text-amber-600 px-6 py-3 rounded-lg font-semibold shadow">Crear cuenta</button>
-            <button onClick={() => alert('Contacto')} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/30 bg-white/10">Contacto <Mail className="h-4 w-4" /></button>
+            <button onClick={() => alert('Nuestro Contato: +57 123 4567 8910')} className="inline-flex items-center gap-2 px-6 py-3 rounded-lg border border-white/30 bg-white/10">Contacto <Mail className="h-4 w-4" /></button>
           </div>
         </div>
       </section>
@@ -404,8 +421,8 @@ useEffect(() => {
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-6">
           <div>
             <div className="flex items-center gap-3 mb-3">
-              <div className="p-1 bg-amber-100 rounded-md">
-                <Mountain className="h-7 w-7 text-amber-500" />
+              <div className="p-1 rounded-md">
+                <img src="./taykalogo.png" alt="" className="h-24 w-full"/>
               </div>
               <div>
                 <div className="font-bold text-lg">Tayka</div>
@@ -416,18 +433,18 @@ useEffect(() => {
           </div>
 
           <div className="text-gray-300">
-            <div className="font-semibold mb-2">Enlaces</div>
+            <div className="font-semibold mb-2">Nuestras Redes Sociales</div>
             <ul className="space-y-1 text-sm">
-              <li className="hover:text-white transition">Características</li>
-              <li className="hover:text-white transition">Precios</li>
-              <li className="hover:text-white transition">Política</li>
+              <li className="hover:text-white transition">Instagram</li>
+              <li className="hover:text-white transition">TikTok</li>
+              <li className="hover:text-white transition">Facebook</li>
             </ul>
           </div>
 
           <div className="text-gray-300">
             <div className="font-semibold mb-2">Contacto</div>
             <div className="flex items-center gap-2 text-sm">
-              <Mail className="h-4 w-4" /> <span>hola@tayka.example</span>
+              <Mail className="h-4 w-4" /> <span>TaykaShop@gmail.com</span>
             </div>
             <div className="mt-3 text-sm text-gray-400">Síguenos en redes para conocer eventos y ventas especiales.</div>
           </div>

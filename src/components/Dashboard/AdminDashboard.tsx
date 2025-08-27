@@ -18,7 +18,7 @@ const AdminDashboard: React.FC = () => {
 
   return (
     <div className="space-y-6">
-      <div>
+      <div className='ml-4 mt-5'>
         <h2 className="text-2xl font-bold text-gray-900 mb-2">Panel de Administración</h2>
         <p className="text-gray-600">Gestiona la plataforma Tayka</p>
       </div>
