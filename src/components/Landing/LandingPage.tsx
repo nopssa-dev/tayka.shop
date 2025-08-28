@@ -74,26 +74,27 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
   const [slideDirection, setSlideDirection] = useState<'next' | 'prev'>('next');
 
   const nextStore = () => {
-    setSlideDirection(1);
-    setCurrentStore((prev) => (prev + 1) % featuredStores!.length);
+    setSlideDirection('next');
+    setCurrentStore((prev) => (prev + 1) % featuredStores.length);
   };
 
   const prevStore = () => {
-    setSlideDirection(-1);
+    setSlideDirection('prev');
     setCurrentStore((prev) =>
-      prev === 0 ? featuredStores!.length - 1 : prev - 1
+      prev === 0 ? featuredStores.length - 1 : prev - 1
     );
   };
 
   // Autoplay
   useEffect(() => {
-    const id = setInterval(() => {
-      setSlideDirection(1);
-      setCurrentStore((prev) => (prev + 1) % featuredStores!.length);
-    }, 7000);
+  const id = setInterval(() => {
+    setSlideDirection('next');
+    setCurrentStore((prev) => (prev + 1) % featuredStores.length);
+  }, 12000);
 
-    return () => clearInterval(id);
-  }, [featuredStores!.length]);
+  return () => clearInterval(id);
+    }, [featuredStores.length]);
+
 
 
   const communityData: CommunityData[] = [
