@@ -37,14 +37,14 @@ const SellerDashboard: React.FC = () => {
     <div className="space-y-4 sm:space-y-6 p-4 sm:p-0">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
         <div>
-          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2">Mi Tienda</h2>
-          <p className="text-gray-600">Gestiona tu tienda y productos</p>
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 ml-4 mt-5">Mi Tienda</h2>
+          <p className="text-gray-600 ml-4 mt-5">Gestiona tu tienda y productos</p>
         </div>
         <div className="flex flex-col sm:flex-row gap-2">
           {!hasStore && (
             <button
               onClick={() => setShowCreateStore(true)}
-              className="w-full sm:w-auto bg-gradient-to-r from-amber-600 to-orange-600 text-white px-4 py-3 rounded-lg font-medium hover:from-amber-700 hover:to-orange-700 transition-all flex items-center justify-center space-x-2"
+              className="w-full sm:w-auto bg-gradient-to-r from-amber-600 to-orange-600 text-white px-4 py-3 rounded-lg font-medium hover:from-amber-700 hover:to-orange-700 transition-all flex items-center justify-center space-x-2 mr-5 mt-5"
             >
               <Plus className="h-4 w-4" />
               <span>Crear Tienda</span>
@@ -89,7 +89,7 @@ const SellerDashboard: React.FC = () => {
             </p>
             <button
               onClick={() => setShowCreateStore(true)}
-              className="w-full sm:w-auto bg-gradient-to-r from-amber-600 to-orange-600 text-white px-6 py-3 rounded-lg font-medium hover:from-amber-700 hover:to-orange-700 transition-all flex items-center justify-center space-x-2"
+              className="w-full sm:w-auto bg-gradient-to-r from-amber-600 to-orange-600 text-white px-6 py-3 rounded-lg font-medium hover:from-amber-700 hover:to-orange-700 transition-all flex items-center justify-center space-x-2 mx-auto"
             >
               <Plus className="h-5 w-5" />
               <span>Crear mi tienda</span>

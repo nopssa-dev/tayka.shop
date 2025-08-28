@@ -1,4 +1,4 @@
-import { Users, Store, Truck, ArrowLeft, ArrowRight, Mail } from 'lucide-react';
+import { Users, Store, Truck, ArrowLeft, ArrowRight, Mail, Instagram, Facebook, Music2 } from 'lucide-react';
 import { AnimatePresence, motion, } from 'framer-motion';
 import {
   ResponsiveContainer,
@@ -12,7 +12,7 @@ import {
   CartesianGrid,
   Legend,
 } from 'recharts';
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 
 interface LandingPageProps {
   onGetStarted: () => void;
@@ -419,34 +419,49 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
       {/* Footer */}
       <footer className="bg-gray-900 text-white py-10">
         <div className="max-w-7xl mx-auto px-4 grid md:grid-cols-3 gap-6">
+          {/* Logo */}
           <div>
             <div className="flex items-center gap-3 mb-3">
               <div className="p-1 rounded-md">
-                <img src="./taykalogo.png" alt="" className="h-24 w-full"/>
+                <img src="./taykalogo.png" alt="" className="h-24 w-full" />
               </div>
               <div>
                 <div className="font-bold text-lg">Tayka</div>
-                <div className="text-xs text-gray-400">Mercado tradicional • Conexión cultural</div>
+                <div className="text-xs text-gray-400">
+                  Mercado tradicional • Conexión cultural
+                </div>
               </div>
             </div>
-            <p className="text-gray-400 text-sm">© {new Date().getFullYear()} Tayka. Todos los derechos reservados.</p>
+            <p className="text-gray-400 text-sm">
+              © {new Date().getFullYear()} Tayka. Todos los derechos reservados.
+            </p>
           </div>
 
+          {/* Redes sociales */}
           <div className="text-gray-300">
             <div className="font-semibold mb-2">Nuestras Redes Sociales</div>
-            <ul className="space-y-1 text-sm">
-              <li className="hover:text-white transition">Instagram</li>
-              <li className="hover:text-white transition">TikTok</li>
-              <li className="hover:text-white transition">Facebook</li>
+            <ul className="space-y-2 text-sm">
+              <li className="flex items-center gap-2 hover:text-white transition cursor-pointer">
+                <Instagram className="h-4 w-4" /> Instagram
+              </li>
+              <li className="flex items-center gap-2 hover:text-white transition cursor-pointer">
+                <Music2 className="h-4 w-4" /> TikTok
+              </li>
+              <li className="flex items-center gap-2 hover:text-white transition cursor-pointer">
+                <Facebook className="h-4 w-4" /> Facebook
+              </li>
             </ul>
           </div>
 
+          {/* Contacto */}
           <div className="text-gray-300">
             <div className="font-semibold mb-2">Contacto</div>
             <div className="flex items-center gap-2 text-sm">
               <Mail className="h-4 w-4" /> <span>TaykaShop@gmail.com</span>
             </div>
-            <div className="mt-3 text-sm text-gray-400">Síguenos en redes para conocer eventos y ventas especiales.</div>
+            <div className="mt-3 text-sm text-gray-400">
+              Síguenos en redes para conocer eventos y ventas especiales.
+            </div>
           </div>
         </div>
       </footer>

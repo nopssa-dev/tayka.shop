@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Upload, Package, Plus, Minus } from 'lucide-react';
+import { X, Package, Plus, Minus } from 'lucide-react';
 
 interface CreateProductModalProps {
   isOpen: boolean;

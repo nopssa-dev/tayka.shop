@@ -1,5 +1,5 @@
 import React from 'react';
-import { Users, Store, Package, TrendingUp, AlertCircle, CheckCircle } from 'lucide-react';
+import { Users, Store, Package, TrendingUp, AlertCircle, CheckCircle, Settings, BarChart3, MessageSquare, ShieldCheck } from 'lucide-react';
 
 const AdminDashboard: React.FC = () => {
   const stats = [
@@ -68,6 +68,7 @@ const AdminDashboard: React.FC = () => {
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
           <h3 className="text-lg font-semibold text-gray-900 mb-4">Acciones Rápidas</h3>
           <div className="space-y-3">
+            {/* Gestionar usuarios */}
             <button className="w-full text-left p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
               <div className="flex items-center space-x-3">
                 <Users className="h-5 w-5 text-blue-500" />
@@ -77,7 +78,8 @@ const AdminDashboard: React.FC = () => {
                 </div>
               </div>
             </button>
-            
+
+            {/* Verificar tiendas */}
             <button className="w-full text-left p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
               <div className="flex items-center space-x-3">
                 <Store className="h-5 w-5 text-green-500" />
@@ -87,13 +89,47 @@ const AdminDashboard: React.FC = () => {
                 </div>
               </div>
             </button>
-            
+
+            {/* Moderar productos */}
             <button className="w-full text-left p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
               <div className="flex items-center space-x-3">
                 <Package className="h-5 w-5 text-purple-500" />
                 <div>
                   <p className="font-medium text-gray-900">Moderar Productos</p>
                   <p className="text-sm text-gray-600">Revisar productos reportados</p>
+                </div>
+              </div>
+            </button>
+
+            {/* Reportes y estadísticas */}
+            <button className="w-full text-left p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
+              <div className="flex items-center space-x-3">
+                <BarChart3 className="h-5 w-5 text-orange-500" />
+                <div>
+                  <p className="font-medium text-gray-900">Reportes y Estadísticas</p>
+                  <p className="text-sm text-gray-600">Monitorea la actividad de la plataforma</p>
+                </div>
+              </div>
+            </button>
+
+            {/* Mensajes y soporte */}
+            <button className="w-full text-left p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
+              <div className="flex items-center space-x-3">
+                <MessageSquare className="h-5 w-5 text-pink-500" />
+                <div>
+                  <p className="font-medium text-gray-900">Mensajes y Soporte</p>
+                  <p className="text-sm text-gray-600">Atender consultas de usuarios</p>
+                </div>
+              </div>
+            </button>
+
+            {/* Seguridad */}
+            <button className="w-full text-left p-3 rounded-lg border border-gray-200 hover:bg-gray-50 transition-colors">
+              <div className="flex items-center space-x-3">
+                <ShieldCheck className="h-5 w-5 text-red-500" />
+                <div>
+                  <p className="font-medium text-gray-900">Seguridad</p>
+                  <p className="text-sm text-gray-600">Revisar alertas y accesos sospechosos</p>
                 </div>
               </div>
             </button>

@@ -22,7 +22,7 @@ const Header: React.FC = () => {
         <div className="flex justify-between items-center h-16">
           <div className="flex items-center">
             <h1 className="text-xl sm:text-2xl font-bold text-amber-800">Tayka</h1>
-            <span className="ml-2 text-sm text-amber-600 hidden sm:inline">
+            <span className="ml-2 text-sm text-amber-600 hidden sm:inline mt-2">
               Madre Tierra
             </span>
           </div>
