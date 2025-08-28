@@ -7,7 +7,7 @@ export interface User {
   createdAt: Date;
 }
 
-export type UserRole = 'buyer' | 'seller' | 'distributor' | 'admin';
+export type UserRole = 'buyer' | 'seller' | 'distributor';
 
 export interface Store {
   id: string;
