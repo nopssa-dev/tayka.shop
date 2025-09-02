@@ -1,3 +1,27 @@
+// import { z } from "zod";
+
+
+// const registerSchema = z
+//   .object({
+//     _id: z.string(), 
+//     name: z.string(),
+//     email: z.string(),
+//     password: z.string(),
+//     confirmPassword: z.string(),
+//     roles: z
+//       .array(z.enum([])),
+//   })
+//   .refine((data) => data.password === data.confirmPassword, {
+//     message: "Las contraseñas no coinciden",
+//     path: ["confirmPassword"],
+//   });
+
+// type FormData = z.infer<typeof registerSchema>;
+// export type RegisterFormData=Pick<FormData, 'name' | 'email' | 'password' | 'confirmPassword'> & {roles: UserRole[]};
+
+
+
+
 export interface User {
   id: string;
   email: string;
@@ -7,7 +31,7 @@ export interface User {
   createdAt: Date;
 }
 
-export type UserRole = 'buyer' | 'seller' | 'distributor';
+export type UserRole = 'buyer' | 'seller' | 'distributor'| 'admin';
 
 export interface Store {
   id: string;

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { UserPlus, Eye, EyeOff } from 'lucide-react';
-import { useAuth } from '../../contexts/AuthContext';
 import type { UserRole } from '../../types';
 
 const RegisterForm: React.FC = () => {
@@ -9,11 +8,12 @@ const RegisterForm: React.FC = () => {
     email: '',
     password: '',
     confirmPassword: '',
+    roles: [] as UserRole[],
   });
-  const [selectedRoles, setSelectedRoles] = useState<UserRole[]>(['buyer']);
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
-  const { register, isLoading } = useAuth();
+  const [isLoading, setIsLoading] = useState(false);
+  const [success, setSuccess] = useState('');
 
   const roleOptions = [
     { value: 'buyer' as UserRole, label: 'Comprador', description: 'Buscar y comprar productos' },
@@ -24,30 +24,59 @@ const RegisterForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
+    setSuccess('');
+    setIsLoading(true);
 
     if (formData.password !== formData.confirmPassword) {
       setError('Las contraseñas no coinciden');
+      setIsLoading(false);
       return;
     }
 
-    if (selectedRoles.length === 0) {
+    if (formData.roles.length === 0) {
       setError('Selecciona al menos un tipo de usuario');
+      setIsLoading(false);
       return;
     }
-
+    
     try {
-      await register(formData.email, formData.password, formData.name, selectedRoles);
+      const response = await fetch('http://localhost:3000/api/members', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Error al registrarse');
+      }
+
+      setSuccess('¡Usuario registrado con éxito!');
+      setFormData({
+        name: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
+        roles: [],
+      });
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Error al registrarse');
+      setError(err instanceof Error ? err.message : 'Error al registrarse. Asegúrate de que el servidor está funcionando.');
+    } finally {
+      setIsLoading(false);
     }
   };
 
   const handleRoleChange = (role: UserRole) => {
-    setSelectedRoles(prev => 
-      prev.includes(role) 
-        ? prev.filter(r => r !== role)
-        : [...prev, role]
-    );
+    setFormData(prev => {
+      const isSelected = prev.roles.includes(role);
+      const newRoles = isSelected
+        ? prev.roles.filter(r => r !== role)
+        : [...prev.roles, role];
+      return { ...prev, roles: newRoles };
+    });
   };
 
   return (
@@ -131,7 +160,7 @@ const RegisterForm: React.FC = () => {
               <label key={role.value} className="flex items-start space-x-3 cursor-pointer">
                 <input
                   type="checkbox"
-                  checked={selectedRoles.includes(role.value)}
+                  checked={formData.roles.includes(role.value)}
                   onChange={() => handleRoleChange(role.value)}
                   className="mt-1 h-4 w-4 text-amber-600 focus:ring-amber-500 border-gray-300 rounded"
                 />
@@ -147,6 +176,12 @@ const RegisterForm: React.FC = () => {
         {error && (
           <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg">
             {error}
+          </div>
+        )}
+        
+        {success && (
+          <div className="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg">
+            {success}
           </div>
         )}
 

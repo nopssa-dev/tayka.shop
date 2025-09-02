@@ -116,7 +116,7 @@ export default function LandingPage({ onGetStarted }: LandingPageProps) {
       name: 'María Quispe',
       place: 'Piedecuesta',
       text: 'Tayka me permitió llevar mis textiles aymaras a clientes de todo el mundo.',
-      avatar: 'https://images.unsplash.com/photo-1545996124-1f1e4b31b1c4?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder',
+      avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=400&auto=format&fit=crop&ixlib=rb-4.0.3&s=placeholder',
     },
     {
       name: 'Carlos Mamani',
